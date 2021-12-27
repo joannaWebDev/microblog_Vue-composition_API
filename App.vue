@@ -2,17 +2,10 @@
   <div id="wrapper">
     <div>
       <label>Search hashtag:</label>
-      <input 
-        :value="currentTag" 
-        @input="handleInput"
-        placeholder="#vue"
-      />
+      <input :value="currentTag" @input="handleInput" placeholder="#vue" />
     </div>
     <div class="cards">
-      <card
-        v-for="post in filteredPosts"
-        :key="post.id"
-      >
+      <card v-for="post in filteredPosts" :key="post.id">
         <template v-slot:title>
           {{ post.title }}
         </template>
@@ -22,9 +15,7 @@
         </template>
 
         <template v-slot:description>
-          <controls 
-            :post="post" 
-          />
+          <controls :post="post" />
         </template>
       </card>
     </div>
@@ -34,29 +25,29 @@
 hashtag -> app
 
 <script>
-import { computed } from 'vue'
-import { store } from './store.js'
-import Card from '../pokemon/Card.vue'
-import Controls from './Controls.vue'
+import { computed } from "vue";
+import { store } from "./store.js";
+import Card from "./Card.vue";
+import Controls from "./Controls.vue";
 
 export default {
   components: {
     Card,
-    Controls
+    Controls,
   },
 
   setup() {
     const handleInput = ($event) => {
-      store.setHashtag($event.target.value)
-    }
+      store.setHashtag($event.target.value);
+    };
 
     return {
       filteredPosts: computed(() => store.posts),
       handleInput,
       currentTag: computed(() => store.state.currentTag),
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -65,7 +56,8 @@ export default {
   justify-content: center;
 }
 
-input, label {
+input,
+label {
   font-size: 30px;
 }
 
